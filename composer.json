@@ -1,0 +1,30 @@
+{
+  "name": "deh4eg/omnipay-kevin",
+  "description": "Kevin gateway based on omnipay library",
+  "type": "library",
+  "keywords": [
+    "gateway",
+    "omnipay",
+    "kevin",
+    "payment",
+    "merchant"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Denis Smolakov",
+      "email": "denissmolakovs@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Omnipay\\Kevin\\": "src/"
+    }
+  },
+  "require": {
+    "omnipay/common": "^3"
+  },
+  "require-dev": {
+    "omnipay/tests": "^3"
+  }
+}
