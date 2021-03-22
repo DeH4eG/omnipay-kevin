@@ -1,0 +1,16 @@
+grumphp:
+  tasks:
+    phpcs:
+      standard: PSR12
+      warning_severity: ~
+      ignore_patterns:
+        - tests/
+      triggered_by: [ php ]
+    phpstan:
+      autoload_file: ~
+      configuration: ~
+      level: 8
+      force_patterns: [ ]
+      ignore_patterns: [ ]
+      triggered_by: [ 'php' ]
+      memory_limit: "-1"
