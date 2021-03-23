@@ -47,4 +47,12 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
     {
         return $this->getValueFromData('confirmLink');
     }
+
+    /**
+     * @return string|null
+     */
+    public function getTransactionReference(): ?string
+    {
+        return $this->getValueFromData('id');
+    }
 }
