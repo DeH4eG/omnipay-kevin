@@ -6,9 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0] - 2021-03-24
+## [v0.1.0-RC] - 2021-03-24
 ### Added
-- Initial release
+- Release v0.1.0-RC
 
-[Unreleased]: https://github.com/DeH4eG/omnipay-kevin/compare/v1.0.0...HEAD
-[0.1.0]: https://github.com/DeH4eG/omnipay-kevin/releases/tag/v1.0.0
+[Unreleased]: https://github.com/DeH4eG/omnipay-kevin/compare/v0.1.0-RC...HEAD
+[v0.1.0-RC]: https://github.com/DeH4eG/omnipay-kevin/releases/tag/v0.1.0-RC
