@@ -189,22 +189,29 @@ class PurchaseRequest extends AbstractRequest
     }
 
     /**
-     * @return string|null
+     * @param string $webHookUrl
+     * @return PurchaseRequest
      */
-    public function getLanguage(): ?string
+    public function setWebhookUrl(string $webHookUrl): PurchaseRequest
     {
-        return $this->getParameter('language');
+        return $this->setParameter('webhookUrl', $webHookUrl);
     }
 
     /**
-     * @return string[]
+     * @return array<string,string>
      */
     protected function getAdditionalHeaders(): array
     {
-        return [
+        $headers = [
             'Redirect-URL' => $this->getRedirectUrl(),
-            'Content-Type' => 'application/json'
+            'Content-Type' => 'application/json',
         ];
+
+        if ($webhookUrl = $this->getWebhookUrl()) {
+            $headers['Webhook-URL'] = $webhookUrl;
+        }
+
+        return $headers;
     }
 
     /**
@@ -213,6 +220,14 @@ class PurchaseRequest extends AbstractRequest
     public function getRedirectUrl(): string
     {
         return $this->getParameter('redirectUrl');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getWebhookUrl(): ?string
+    {
+        return $this->getParameter('webhookUrl');
     }
 
     /**
@@ -247,6 +262,14 @@ class PurchaseRequest extends AbstractRequest
     public function getRedirectPreferred(): bool
     {
         return (bool)$this->getParameter('redirectPreferred');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLanguage(): ?string
+    {
+        return $this->getParameter('language');
     }
 
     /**
