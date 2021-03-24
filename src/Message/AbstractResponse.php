@@ -57,7 +57,7 @@ abstract class AbstractResponse extends OmnipayAbstractResponse
      */
     protected function getValueFromData(string $key, $default = null)
     {
-        $data = $this->getData();
+        $data = $this->getData() ?? [];
 
         return array_key_exists($key, $data) ? $data[$key] : $default;
     }
