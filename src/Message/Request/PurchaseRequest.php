@@ -180,6 +180,23 @@ class PurchaseRequest extends AbstractRequest
     }
 
     /**
+     * @param string $lang
+     * @return PurchaseRequest
+     */
+    public function setLanguage(string $lang): PurchaseRequest
+    {
+        return $this->setParameter('language', $lang);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLanguage(): ?string
+    {
+        return $this->getParameter('language');
+    }
+
+    /**
      * @return string[]
      */
     protected function getAdditionalHeaders(): array
@@ -205,7 +222,8 @@ class PurchaseRequest extends AbstractRequest
     {
         $query = [
             'bankId' => $this->getBankId(),
-            'redirectPreferred' => $this->getRedirectPreferred() ? 'true' : 'false'
+            'redirectPreferred' => $this->getRedirectPreferred() ? 'true' : 'false',
+            'lang' => $this->getLanguage()
         ];
 
         return sprintf(
