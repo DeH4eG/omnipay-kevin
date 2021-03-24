@@ -6,6 +6,7 @@ use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Helper;
 use Omnipay\Common\Message\NotificationInterface;
 use Omnipay\Common\Message\RequestInterface;
+use Omnipay\Kevin\Message\Request\FetchTransactionRequest;
 use Omnipay\Kevin\Message\Request\PurchaseRequest;
 use Omnipay\Kevin\Traits\ApiCredentialsTrait;
 
@@ -16,7 +17,6 @@ use Omnipay\Kevin\Traits\ApiCredentialsTrait;
  * @method RequestInterface capture(array $options = [])
  * @method RequestInterface purchase(array $options = [])
  * @method RequestInterface refund(array $options = [])
- * @method RequestInterface fetchTransaction(array $options = [])
  * @method RequestInterface void(array $options = [])
  * @method RequestInterface createCard(array $options = [])
  * @method RequestInterface updateCard(array $options = [])
@@ -59,11 +59,20 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * @param array<string,string> $options
+     * @param array<string> $options
      * @return RequestInterface
      */
     public function completePurchase(array $options = []): RequestInterface
     {
         return $this->createRequest(PurchaseRequest::class, $options);
+    }
+
+    /**
+     * @param array<string> $options
+     * @return RequestInterface
+     */
+    public function fetchTransaction(array $options = []): RequestInterface
+    {
+        return $this->createRequest(FetchTransactionRequest::class, $options);
     }
 }
