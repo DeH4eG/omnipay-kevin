@@ -22,16 +22,23 @@ abstract class AbstractResponse extends OmnipayAbstractResponse
     private $statusCode;
 
     /**
+     * @var string
+     */
+    private $reasonPhrase;
+
+    /**
      * AbstractResponse constructor.
      * @param RequestInterface $request
      * @param mixed $data
      * @param int $statusCode
+     * @param string $reasonPhrase
      */
-    public function __construct(RequestInterface $request, $data, int $statusCode)
+    public function __construct(RequestInterface $request, $data, int $statusCode, string $reasonPhrase)
     {
         parent::__construct($request, json_decode($data, true));
 
         $this->statusCode = $statusCode;
+        $this->reasonPhrase = $reasonPhrase;
     }
 
     /**
@@ -51,14 +58,50 @@ abstract class AbstractResponse extends OmnipayAbstractResponse
     }
 
     /**
+     * @return string
+     */
+    public function getMessage(): string
+    {
+        return $this->getValueFromData('error.description') ?? $this->getReasonPhrase();
+    }
+
+    /**
      * @param string $key
      * @param null $default
      * @return mixed|null
      */
     protected function getValueFromData(string $key, $default = null)
     {
-        $data = $this->getData() ?? [];
+        $data = $this->getData();
 
-        return array_key_exists($key, $data) ? $data[$key] : $default;
+        if (strpos($key, '.') === false) {
+            return $data[$key] ?? $default;
+        }
+
+        foreach (explode('.', $key) as $segment) {
+            if (array_key_exists($segment, $data)) {
+                $data = $data[$segment];
+            } else {
+                return $default;
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReasonPhrase(): string
+    {
+        return $this->reasonPhrase;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCode(): ?string
+    {
+        return $this->getValueFromData('error.code');
     }
 }

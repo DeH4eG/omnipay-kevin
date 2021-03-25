@@ -40,7 +40,11 @@ abstract class AbstractRequest extends OmnipayAbstractRequest
             $body
         );
 
-        return $this->makeResponse($response->getBody()->getContents(), $response->getStatusCode());
+        return $this->makeResponse(
+            $response->getBody()->getContents(),
+            $response->getStatusCode(),
+            $response->getReasonPhrase()
+        );
     }
 
     /**
@@ -84,11 +88,13 @@ abstract class AbstractRequest extends OmnipayAbstractRequest
     /**
      * @param string $data
      * @param int $statusCode
+     * @param string $reasonPhrase
      * @return ResponseInterface
      */
     abstract protected function makeResponse(
         string $data,
-        int $statusCode
+        int $statusCode,
+        string $reasonPhrase
     ): ResponseInterface;
 
     /**
