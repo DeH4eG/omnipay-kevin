@@ -275,10 +275,11 @@ class PurchaseRequest extends AbstractRequest
     /**
      * @param string $data
      * @param int $statusCode
+     * @param string $reasonPhrase
      * @return ResponseInterface
      */
-    protected function makeResponse(string $data, int $statusCode): ResponseInterface
+    protected function makeResponse(string $data, int $statusCode, string $reasonPhrase): ResponseInterface
     {
-        return $this->response = new PurchaseResponse($this, $data, $statusCode);
+        return $this->response = new PurchaseResponse($this, $data, $statusCode, $reasonPhrase);
     }
 }

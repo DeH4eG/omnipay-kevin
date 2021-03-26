@@ -154,8 +154,8 @@ class FetchTransactionRequest extends AbstractRequest
     /**
      * @inheritDoc
      */
-    protected function makeResponse(string $data, int $statusCode): ResponseInterface
+    protected function makeResponse(string $data, int $statusCode, string $reasonPhrase): ResponseInterface
     {
-        return $this->response = new FetchTransactionResponse($this, $data, $statusCode);
+        return $this->response = new FetchTransactionResponse($this, $data, $statusCode, $reasonPhrase);
     }
 }
