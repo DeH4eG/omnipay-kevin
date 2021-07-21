@@ -104,6 +104,11 @@ $response = $gateway->fetchTransaction($options)->send();
 if ($response->isSuccessful() && $response->isPaymentReceived()) {
     // TODO: Payment received
 }
+// OR
+
+if ($response->isSuccessful() && $response->isPaymentCompleted()) {
+    // TODO: Payment completed
+}
 ```
 
 ## Changelog
