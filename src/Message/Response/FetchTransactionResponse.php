@@ -13,11 +13,6 @@ class FetchTransactionResponse extends AbstractResponse
     /**
      * @var string
      */
-    private const PAYMENT_RECEIVED = 'RCVD';
-
-    /**
-     * @var string
-     */
     private const PAYMENT_STATUS_GROUP_COMPLETED = 'completed';
 
     /**
@@ -25,15 +20,7 @@ class FetchTransactionResponse extends AbstractResponse
      */
     public function isSuccessful(): bool
     {
-        return $this->isStatusCodeOk() && $this->getPaymentStatus();
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPaymentStatus(): ?string
-    {
-        return $this->getValueFromData('status');
+        return $this->isStatusCodeOk() && $this->getPaymentGroup();
     }
 
     /**
@@ -44,13 +31,6 @@ class FetchTransactionResponse extends AbstractResponse
         return $this->getValueFromData('group');
     }
 
-    /**
-     * @return bool
-     */
-    public function isPaymentReceived(): bool
-    {
-        return $this->getPaymentStatus() === self::PAYMENT_RECEIVED;
-    }
 
     /**
      * @return bool

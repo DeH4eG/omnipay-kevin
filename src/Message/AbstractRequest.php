@@ -18,7 +18,7 @@ abstract class AbstractRequest extends OmnipayAbstractRequest
     /**
      * @var string
      */
-    private const API_URL = 'https://api.getkevin.eu/platform/v0.2/';
+    private const API_URL = 'https://api.getkevin.eu/platform/v0.3/';
 
     /**
      * @var string
@@ -31,7 +31,7 @@ abstract class AbstractRequest extends OmnipayAbstractRequest
      */
     public function sendData($data): ResponseInterface
     {
-        $body = json_encode($data) ?: null;
+        $body = json_encode($data, JSON_FORCE_OBJECT) ?: null;
 
         $response = $this->httpClient->request(
             static::HTTP_METHOD,

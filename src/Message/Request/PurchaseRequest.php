@@ -23,12 +23,10 @@ class PurchaseRequest extends AbstractRequest
      */
     private const REQUIRED_OPTIONS = [
         'redirectUrl' => '',
-        'creditorName' => '',
         'amount' => '',
         'currencyCode' => '',
-        'endToEndId' => '',
-        'informationUnstructured' => '',
-        'creditorAccount' => 'iban|bban|sortCodeAccountNumber'
+        'bankPaymentMethod' => 'endToEndId|informationUnstructured|iban|creditorName|creditorAccount',
+        'description' => ''
     ];
 
     /**
@@ -39,15 +37,36 @@ class PurchaseRequest extends AbstractRequest
     {
         $this->validate(self::REQUIRED_OPTIONS);
 
-        return [
+        $data = [
             'amount' => $this->getAmount(),
             'currencyCode' => $this->getCurrencyCode(),
-            'creditorName' => $this->getCreditorName(),
-            'endToEndId' => $this->getEndToEndId(),
-            'informationUnstructured' => $this->getInformationUnstructured(),
-            'creditorAccount' => $this->getCreditorAccount(),
-            'identifier' => $this->getIdentifier()
+            'bankPaymentMethod' => $this->getBankPaymentMethod(),
+            'identifier' => $this->getIdentifier(),
+            'description' => $this->getDescription()
         ];
+
+        if (($cardPaymentMethod = $this->getCardPaymentMethod()) !== null) {
+            $data['cardPaymentMethod'] = $cardPaymentMethod;
+        }
+
+        return $data;
+    }
+
+    /**
+     * @return array<string>|null
+     */
+    public function getCardPaymentMethod()
+    {
+        return $this->getParameter('cardPaymentMethod');
+    }
+
+    /**
+     * @param array<string> $cardPaymentMethod
+     * @return PurchaseRequest
+     */
+    public function setCardPaymentMethod(array $cardPaymentMethod = null): PurchaseRequest
+    {
+        return $this->setParameter('cardPaymentMethod', $cardPaymentMethod);
     }
 
     /**
@@ -56,14 +75,6 @@ class PurchaseRequest extends AbstractRequest
     public function getCurrencyCode(): string
     {
         return $this->getParameter('currencyCode');
-    }
-
-    /**
-     * @return string
-     */
-    public function getCreditorName(): string
-    {
-        return $this->getParameter('creditorName');
     }
 
     /**
@@ -85,9 +96,9 @@ class PurchaseRequest extends AbstractRequest
     /**
      * @return array<string,string>
      */
-    public function getCreditorAccount(): array
+    public function getBankPaymentMethod(): array
     {
-        return $this->getParameter('creditorAccount');
+        return $this->getParameter('bankPaymentMethod');
     }
 
     /**
@@ -108,21 +119,12 @@ class PurchaseRequest extends AbstractRequest
     }
 
     /**
-     * @param string $informationUnstructured
+     * @param array<string,string> $bankPaymentMethod
      * @return PurchaseRequest
      */
-    public function setInformationUnstructured(string $informationUnstructured): PurchaseRequest
+    public function setBankPaymentMethod(array $bankPaymentMethod): PurchaseRequest
     {
-        return $this->setParameter('informationUnstructured', $informationUnstructured);
-    }
-
-    /**
-     * @param array<string,string> $creditorAccount
-     * @return PurchaseRequest
-     */
-    public function setCreditorAccount(array $creditorAccount): PurchaseRequest
-    {
-        return $this->setParameter('creditorAccount', $creditorAccount);
+        return $this->setParameter('bankPaymentMethod', $bankPaymentMethod);
     }
 
     /**
@@ -150,24 +152,6 @@ class PurchaseRequest extends AbstractRequest
     public function setCurrencyCode(string $currencyCode): PurchaseRequest
     {
         return $this->setParameter('currencyCode', $currencyCode);
-    }
-
-    /**
-     * @param string $creditorName
-     * @return PurchaseRequest
-     */
-    public function setCreditorName(string $creditorName): PurchaseRequest
-    {
-        return $this->setParameter('creditorName', $creditorName);
-    }
-
-    /**
-     * @param string $endToEndId
-     * @return PurchaseRequest
-     */
-    public function setEndToEndId(string $endToEndId): PurchaseRequest
-    {
-        return $this->setParameter('endToEndId', $endToEndId);
     }
 
     /**
