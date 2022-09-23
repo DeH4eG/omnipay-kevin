@@ -27,48 +27,8 @@ class FetchTransactionRequest extends AbstractRequest
      * @var array<string,string>
      */
     private const REQUIRED_OPTIONS = [
-        'paymentId' => '',
-        'psuIpAddress' => '',
-        'psuUserAgent' => '',
-        'psuIpPort' => '',
-        'psuDeviceId' => ''
+        'paymentId' => ''
     ];
-
-    /**
-     * @param string $ipAddress
-     * @return FetchTransactionRequest
-     */
-    public function setPsuIpAddress(string $ipAddress): FetchTransactionRequest
-    {
-        return $this->setParameter('psuIpAddress', $ipAddress);
-    }
-
-    /**
-     * @param string $userAgent
-     * @return FetchTransactionRequest
-     */
-    public function setPsuUserAgent(string $userAgent): FetchTransactionRequest
-    {
-        return $this->setParameter('psuUserAgent', $userAgent);
-    }
-
-    /**
-     * @param string $ipPort
-     * @return FetchTransactionRequest
-     */
-    public function setPsuIpPort(string $ipPort): FetchTransactionRequest
-    {
-        return $this->setParameter('psuIpPort', $ipPort);
-    }
-
-    /**
-     * @param string $deviceId
-     * @return FetchTransactionRequest
-     */
-    public function setPsuDeviceId(string $deviceId): FetchTransactionRequest
-    {
-        return $this->setParameter('psuDeviceId', $deviceId);
-    }
 
     /**
      * @inheritDoc
@@ -104,51 +64,6 @@ class FetchTransactionRequest extends AbstractRequest
     public function getPaymentId(): string
     {
         return $this->getParameter('paymentId');
-    }
-
-    /**
-     * @return string[]
-     */
-    protected function getAdditionalHeaders(): array
-    {
-        return [
-            'PSU-IP-Address' => $this->getPsuIpAddress(),
-            'PSU-User-Agent' => $this->getPsuUserAgent(),
-            'PSU-IP-Port' => $this->getPsuIpPort(),
-            'PSU-Device-ID' => $this->getPsuDeviceId()
-        ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getPsuIpAddress(): string
-    {
-        return $this->getParameter('psuIpAddress');
-    }
-
-    /**
-     * @return string
-     */
-    public function getPsuUserAgent(): string
-    {
-        return $this->getParameter('psuUserAgent');
-    }
-
-    /**
-     * @return string
-     */
-    public function getPsuIpPort(): string
-    {
-        return $this->getParameter('psuIpPort');
-    }
-
-    /**
-     * @return string
-     */
-    public function getPsuDeviceId(): string
-    {
-        return $this->getParameter('psuDeviceId');
     }
 
     /**

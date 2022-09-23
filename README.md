@@ -45,23 +45,29 @@ $gateway
     ->setClientSecret('123456789abcdefg');
 
 $options = [
-    'amount' => '12.34',
+$options = [
+    'amount' => '13.13',
     'currencyCode' => 'EUR', // 3 letter currency code (ISO 4217)
-    'creditorName' => 'Name Surname',
-    'endToEndId' => '123456789', // Max 32 symbols
-    'informationUnstructured' => 'order-123', // Max 140 characters; Regex Pattern - /^[a-zA-Z0-9/?:().,'+ -]{1,140}$/
-    'creditorAccount' => [ // Must contains at least one of (iban,bban,sortCodeAccountNumber) 
-        'iban' => '123456789',
-        'bban' => '123456789',
-        'sortCodeAccountNumber' => '12345612345678', // Regex Pattern - ^[0-9]{6}[0-9]{8}$
-        'currencyCode' => 'EUR' // (optional) 3 letter currency code (ISO 4217)
+    'description' => 'Testing',
+    'bankPaymentMethod' => [
+        'endToEndId' => 'order-123', // Max 33 symbols,
+        'informationUnstructured' => [
+            'reference' => 'order-123'
+        ],
+        'iban' => 'AA13AAAA123456789',
+        'creditorName' => 'Name Surname',
+        'creditorAccount' => [ // Must contain at least one of [iban, bban, sortCodeAccountNumber]
+            'iban' => 'AA13AAAA123456789'
+        ]
     ],
     'identifier' => [
         'email' => 'email@email.com'
     ],
+    // 'cardPaymentMethod' => [], // (optional) To enable card payments
     'redirectUrl' => 'https://example.com/result.php?gateway=Kevin',
     'language' => 'lv', // (optional) Gateway UI language; Available - (en, lt, lv, et, fi, se, ru); Default - en
-    'webhookUrl' => 'https://example.com/webhook.php?gateway=Kevin' // (optional) For more details please see https://docs.getkevin.eu/public/platform/v0.2#operation/initiatePayment
+    'webhookUrl' => 'https://example.com/webhook.php?gateway=Kevin' // (optional) For more details please see https://developer.kevin.eu/platform/payments/payment-verification
+];
 ];
 
 /** @var PurchaseResponse $response */
@@ -91,20 +97,11 @@ $gateway
     ->setClientSecret('123456789abcdefg');
 
 $options = [
-    'paymentId' => '13', // Payment identification from 'Initiate payment' response
-    'psuIpAddress' => '127.0.0.1',
-    'psuUserAgent' => $_SERVER['HTTP_USER_AGENT'],
-    'psuIpPort' => $_SERVER['SERVER_PORT'],
-    'psuDeviceId' => '123',
+    'paymentId' => '13' // Payment identification from 'Initiate payment'
 ];
 
 /** @var FetchTransactionResponse $response */
 $response = $gateway->fetchTransaction($options)->send();
-
-if ($response->isSuccessful() && $response->isPaymentReceived()) {
-    // TODO: Payment received
-}
-// OR
 
 if ($response->isSuccessful() && $response->isPaymentCompleted()) {
     // TODO: Payment completed

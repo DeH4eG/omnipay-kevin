@@ -37,7 +37,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
      */
     private function isPaymentStarted(): bool
     {
-        return $this->getValueFromData('status') === self::STATUS_STARTED;
+        return $this->getValueFromData('bankStatus') === self::STATUS_STARTED;
     }
 
     /**
