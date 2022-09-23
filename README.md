@@ -12,9 +12,7 @@ Omnipay is installed via [Composer](https://getcomposer.org/). To install, simpl
 
 ## API docs
 
-> Note! Currently, library supports v0.2 of API
-
-Kevin gateway API documentation you can find [here](https://docs.getkevin.eu/public/platform/v0.2)
+Kevin gateway API documentation you can find [here](https://api-reference.kevin.eu/public/platform/v0.3)
 
 ## Usage
 
@@ -30,7 +28,7 @@ Currently, library implements 2 endpoints:
 
 |Method|Endpoint|
 |---|---|
-|`POST`|[/pis/payment](https://docs.getkevin.eu/public/platform/v0.2#operation/initiatePayment)|
+|`POST`|[/pis/payment](https://api-reference.kevin.eu/public/platform/v0.3#tag/Payment-Initiation-Service/operation/initiatePayment)|
 
 ```php
 use Omnipay\Kevin\Gateway;
@@ -82,7 +80,7 @@ if ($response->isRedirect()) {
 
 |Method|Endpoint|
 |---|---|
-|`GET`|[/pis/payment/{paymentId}/status](https://docs.getkevin.eu/public/platform/v0.2#operation/getPaymentStatus)|
+|`GET`|[/pis/payment/{paymentId}/status](https://api-reference.kevin.eu/public/platform/v0.3#tag/Payment-Initiation-Service/operation/getPaymentStatus)|
 
 ```php
 use Omnipay\Kevin\Gateway;
