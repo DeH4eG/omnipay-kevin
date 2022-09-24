@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.0.1] - 2022-09-25
+### Changed
+- Check status by group instead of the bank
+
 ## [v2.0.0] - 2022-09-23
 ### Changed
 - The version of the kevin API was updated to 0.3
@@ -25,7 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Release v0.1.0-RC
 
-[Unreleased]: https://github.com/DeH4eG/omnipay-kevin/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/DeH4eG/omnipay-kevin/compare/v2.0.1...HEAD
+[v2.0.1]: https://github.com/DeH4eG/omnipay-kevin/releases/tag/v2.0.1
 [v2.0.0]: https://github.com/DeH4eG/omnipay-kevin/releases/tag/v2.0.0
 [v1.1.0]: https://github.com/DeH4eG/omnipay-kevin/releases/tag/v1.1.0
 [v1.0.0]: https://github.com/DeH4eG/omnipay-kevin/releases/tag/v1.0.0
