@@ -14,7 +14,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
     /**
      * @var string
      */
-    private const STATUS_STARTED = 'STRD';
+    private const STATUS_STARTED = 'started';
 
     /**
      * @return bool
@@ -37,7 +37,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
      */
     private function isPaymentStarted(): bool
     {
-        return $this->getValueFromData('bankStatus') === self::STATUS_STARTED;
+        return $this->getValueFromData('statusGroup') === self::STATUS_STARTED;
     }
 
     /**
