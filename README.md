@@ -43,7 +43,6 @@ $gateway
     ->setClientSecret('123456789abcdefg');
 
 $options = [
-$options = [
     'amount' => '13.13',
     'currencyCode' => 'EUR', // 3 letter currency code (ISO 4217)
     'description' => 'Testing',
@@ -61,11 +60,10 @@ $options = [
     'identifier' => [
         'email' => 'email@email.com'
     ],
-    // 'cardPaymentMethod' => [], // (optional) To enable card payments
+    'cardPaymentMethod' => [], // (optional) To enable card payments
     'redirectUrl' => 'https://example.com/result.php?gateway=Kevin',
     'language' => 'lv', // (optional) Gateway UI language; Available - (en, lt, lv, et, fi, se, ru); Default - en
     'webhookUrl' => 'https://example.com/webhook.php?gateway=Kevin' // (optional) For more details please see https://developer.kevin.eu/platform/payments/payment-verification
-];
 ];
 
 /** @var PurchaseResponse $response */
